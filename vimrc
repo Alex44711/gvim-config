@@ -56,7 +56,7 @@ endif
 " Mapping setting
 nnoremap <F9> :bn<cr>
 nnoremap <F10> :bp<cr>
-nnoremap <C-w> :bd<cr>
+nnoremap <A-w> :bd<cr>
 
 " powerline symbols
 let g:airline_theme = 'molokai'
