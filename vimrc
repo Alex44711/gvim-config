@@ -3,11 +3,12 @@ language en_US.UTF-8				" Set language
 colorscheme evening				" Set theme
 set nocompatible                                " Set nocompatible
 set lines=35 columns=120	                " Set the window&font size
-set guifont=Powerline_Consolas:h13              " Set the font
+set guifont=Powerline_Consolas:h14:cANSI        " Set the font
 set showmode                                    " Show current mode
 set autoindent                                  " Set auto alignment
 set expandtab                                   " Tab to space
-set softtabstop=4                               " Tab = 2 space         
+set softtabstop=2                               " Tab = 2 space         
+set shiftwidth=2                                " Set format code indentation 2
 set number                                      " Show line number
 set cursorline                                  " Highlight current line    
 set showmatch                                   " Bracket matching
@@ -37,26 +38,30 @@ source $VIMRUNTIME/menu.vim
 set termencoding=cp936
 
 " Plugins management
+silent! 
 call plug#begin('$VIM/vim82/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Parentheses completion
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 " Show the side bar
 Plug 'scrooloose/nerdTree'
 " Airline dependency to see the branch in section_b
 Plug 'tpope/vim-fugitive'
+" Search file plugin
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
-
-" Vim-Airline Setting
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
 
 " Mapping setting
 nnoremap <F9> :bn<cr>
 nnoremap <F10> :bp<cr>
 nnoremap <A-w> :bd<cr>
+let g:ctrl_map='<c-p>'
+
+" Vim-Airline Setting
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
 
 " powerline symbols
 let g:airline_theme = 'molokai'
@@ -74,11 +79,12 @@ let g:airline_symbols.dirty='⚡'
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.maxlinenr = ''
-let g:airline_section_b = '%{strftime("%H:%M")}'
-"let g:airline_section_c = '%{getcwd()}'
+"let g:airline_section_b = '%{strftime("%H:%M")}'
+"let g:airline_section_b = '%{gitbranch#name()}'
+let g:airline_section_c = '%{getcwd()}'
 let g:airline_section_y = '[%{&fileformat}]'
 let g:airline_section_z = '%p%% %l :  %c'
 
-" Vimtweak64.dll
-au GUIEnter * call libcallnr("vimtweak64.dll", "SetAlpha", 200)
+" Vimtweak
+au GUIEnter * call libcallnr("vimtweak64.dll", "SetAlpha", 205)
 au GUIEnter * NERDTree
